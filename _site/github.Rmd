@@ -4,7 +4,7 @@ description: |
   Huge thanks to Ben Wiedermann at HMC for sharing the following.  
 author:
   - name: Jo Hardin 
-    url: https://m154-comp-stats.netlify.app/
+    url: https://m158-lin-mod.netlify.app/
     affiliation: Pomona College
     affiliation_url: https://hardin47.netlify.app/
   - name: original content by Ben Wiedermann
@@ -34,12 +34,13 @@ set.seed(4747)
 # Working on assignments with GitHub and Gradescope
 
 
-In Math 154, we will use GitHub + Gradescope to access and submit assignments.  Here is the basic structure of how it will work:
+In Math 158, we will use GitHub to access and submit assignments (no Gradescope).  Here is the basic structure of how it will work:
 
 1. Get the assignment materials from GitHub classroom.
 2. Clone the repository to any machine you are using.
 3. Work on the assignment and push back to GitHub.
-4. Submit the assignment on Gradescope.
+
+(4. The grader will then knit your file, if it doesn't knit, you won't get credit for it.  The grader will grade it and push it back to your GitHub repo.  You will find the graded assignment on your own repo.)
 
 <aside>
 ```{r echo = FALSE, fig.cap="image credit: xkcd", fig.alt = "xkcd comic detailing that Git can be pretty complicated."}
@@ -177,29 +178,5 @@ To make sure that the work went through, always check your GitHub repo online to
 include_graphics("images/check-github.png")
 ```
 
-# Submit the assignment on Gradescope
 
-You will submit your assignments via Gradescope.
-To submit your assignment, complete the following steps:
-
-<aside>
-The first time you submit, you may need to click "Connect to GitHub", to connect your Gradescope account to your GitHub account.
-</aside>
-
-1. Access the course’s Gradescope site, select the appropriate assignment, and then choose GitHub as the submission method.  You must access the course's Gradescope site via the side menu in Sakai.
-
-```{r echo = FALSE, fig.cap="Access Gradescope via Sakai.", fig.alt = "Screen shot of Gradescope connection from inside Sakai."}
-include_graphics("images/gradescope-sakai.png")
-``` 
-
-2. The first time you submit your repository, you will need to authorize Gradescope to access your git repository. Select the appropriate repository and branch (brank will almost always be `main`).
-
-```{r echo = FALSE, fig.cap="Submit files directly from GitHub.", fig.alt = "Screen shot of Gradescope instruction to submit via GitHub."}
-include_graphics("images/gradescope-github.png")
-``` 
-
-3. If this is a pair-programming submission, you will need to associate all team members with the submission. After you upload your files, click "Add Group Member" and add your partner to the submission. Add your team member to your Gradescope submission
-
-You can submit multiple times before the deadline. Your last submission will determine your grade.
-
-Once assignments are completely graded, you will be able to see your grade and assignment feedback on Gradescope. Grades will also be synched with Sakai.
+Once assignments are completely graded, you will be able to see your grade and assignment feedback on your own GitHub repo. Grades will also be recorded in Sakai.

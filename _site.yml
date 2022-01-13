@@ -14,8 +14,6 @@ navbar:
     image: images/st47s.png
     href: https://hardin47.netlify.app/
   right:
-    - text: "Daily"
-      href: daily.html
     - text: "Syllabus"
       href: syllabus.html
     - text: "Class Notes"
