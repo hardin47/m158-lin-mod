@@ -1,5 +1,5 @@
 ---
-title: "Working on assignments with GitHub and Gradescope"
+title: "Working on assignments with GitHub"
 description: |
   Huge thanks to Ben Wiedermann at HMC for sharing the following.  
 author:
@@ -31,7 +31,7 @@ library(praise)
 set.seed(4747)
 ```
 
-# Working on assignments with GitHub and Gradescope
+# Working on assignments with GitHub
 
 
 In Math 158, we will use GitHub to access and submit assignments (no Gradescope).  Here is the basic structure of how it will work:
