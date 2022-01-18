@@ -254,7 +254,7 @@ knitr::include_graphics("../images/cookingRstudio.jpg")
 ## Tools: a GitHub merge conflict
 
 
-```{r, out.width = "500px", echo=FALSE}
+```{r, out.width = "300px", echo=FALSE}
 knitr::include_graphics("../images/git_xkcd.png")
 ```
 
