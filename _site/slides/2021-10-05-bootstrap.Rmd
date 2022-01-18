@@ -1,0 +1,586 @@
+---
+title: "Bootstrapping"
+author: "Jo Hardin"
+date: "October 3 & 5, 2021"
+output:
+  xaringan::moon_reader:
+    nature:
+      highlightlines: true
+      titleSlideClass: ["right", "top", "my-title"]
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(mosaic)
+library(boot)
+library(ggthemes)
+library(knitr)
+library(skimr)
+opts_chunk$set(
+  message=FALSE,
+  warning=FALSE,
+  size='tiny',
+  tidy=FALSE)
+options(
+  digits = 5,
+  pillar.sigfig = 5
+  )
+library(lubridate)
+library(sysfonts)
+```
+
+```{r echo = FALSE}
+#devtools::install_github("gadenbuie/xaringanExtra")
+library(xaringanExtra)
+xaringanExtra::use_panelset()
+```
+
+# Agenda 10/5/21
+
+0. Finish power in the permutation test context
+1. Review: logic of confidence intervals
+2. Logic of bootstrapping (resample from the sample *with* replacement)
+3. BS SE of a statistic
+
+---
+
+## Why bootstrap?
+
+Motivation:  
+
+> to estimate the variability and distribution of a statistic in repeated samples of size $n$ (*not* dependent on $H_0$ being true).
+
+---
+
+## Variability
+
+* standard deviation of the **data**: $s = \sqrt{\frac{\sum_{i=1}^n(X_i - \overline{X})^2}{n-1}}$
+
+* standard error of the **statistic**: depends...
+
+
+---
+## Intuitive understanding
+
+See in the applets for an intuitive understanding of both confidence intervals and boostrapping:
+
+* <a href = "http://www.lock5stat.com/StatKey/" target = "_blank">StatKey applets</a> which demonstrate bootstrapping.
+
+* <a href = "http://www.rossmanchance.com/applets/ConfSim.html" target = "_blank">Confidence interval logic</a> from the Rossman & Chance applets.
+
+
+---
+
+## Basic Notation
+
+(n.b., we don't ever do what is on this slide)
+
+Let $\theta$ be the parameter of interest, and let $\hat{\theta}$ be the estimate of $\theta$.  If we could, we'd take many samples of size $n$ from the population to create a **sampling distribution** for $\hat{\theta}$.  Consider taking $B$ random samples from the population.
+
+\begin{align}
+\hat{\theta}(\cdot) = \frac{1}{B} \sum_{i=1}^B \hat{\theta}_i
+\end{align}
+is the best guess for $\theta$.  If $\hat{\theta}$ is very different from $\theta$, we would call it **biased**.
+\begin{align}
+SE(\hat{\theta}) &= \bigg[ \frac{1}{B-1} \sum_{i=1}^B(\hat{\theta}_i - \hat{\theta}(\cdot))^2 \bigg]^{1/2}\\
+q_1 &= [0.25 B] \ \ \ \ \hat{\theta}^{(q_1)} = \mbox{25}\% \mbox{ cutoff}\\
+q_3 &= [0.75 B] \ \ \ \ \hat{\theta}^{(q_3)} = \mbox{75}\% \mbox{ cutoff}\\
+\end{align}
+
+---
+
+## Ideally
+
+(we never do part (a))
+
+```{r out.width='60%', fig.align="center",  echo=FALSE, fig.cap = "From Hesterberg et al., Chapter 16 of Introduction to the Practice of Statistics by  Moore, McCabe, and Craig"}
+knitr::include_graphics("../images/BSlogic.png")
+```
+
+---
+
+## Bootstrap Procedure
+
+1. Resample data **with replacement** from the original sample.
+2. Calculate the statistic of interest for each resample.
+3. Repeat 1. and 2. $B$ times.
+4. Use the bootstrap distribution for inference.
+
+---
+
+## Bootstrap Notation
+
+(n.b., bootstrapping is the process on this slide)
+
+Take many ( $B$ ) resamples of size $n$ from the sample to create a bootstrap distribution for $\hat{\theta}^*$ (instead of the sampling distribution for $\hat{\theta}$).
+
+Let $\hat{\theta}^*(b)$ be the calculated statistic of interest for the $b^{th}$ bootstrap sample.  The best guess for $\theta$ is:
+\begin{align}
+\hat{\theta}^* = \frac{1}{B} \sum_{b=1}^B \hat{\theta}^*(b)
+\end{align}
+(if $\hat{\theta}^*$ is very different from $\hat{\theta}$, we call it biased.)  And the estimated value for the standard error of the estimate is
+\begin{align}
+\hat{SE}^* = \bigg[ \frac{1}{B-1} \sum_{b=1}^B ( \hat{\theta}^*(b) - \hat{\theta}^*)^2 \bigg]^{1/2}
+\end{align}
+
+---
+
+## What do we get?
+
+
+Just like repeatedly taking samples from the population, taking resamples from the sample allows us to characterize the bootstrap distribution which approximates the sampling distribution.  
+
+> The bootstrap distribution approximates the **shape, spread, & bias** of the true sampling distribution.
+
+---
+
+```{r out.width='30%', fig.align="center",  echo=FALSE, fig.cap = "From Hesterberg et al., Chapter 16 of Introduction to the Practice of Statistics by  Moore, McCabe, and Craig.  The left image represents the mean with n=50.  The center image represents the mean with n=9.  The right image represents the median with n=15.", fig.show='hold'}
+knitr::include_graphics(c("../images/BShesterberg1.png",
+                          "../images/BShesterberg2.png",
+                          "../images/BShesterberg3.png"))
+```
+
+---
+
+## Example
+- Hesketh and Everitt (2000) report on a study by Caplehorn and Bell (1991) that investigated the time (days) spent in a clinic for methadone maintenance treatment for people addicted to heroin.  
+
+- The data include the amount of time that the subjects stayed in the facility until treatment was terminated. 
+
+- For about 37% of the subjects, the study ended while they were still the in clinic (status=0).  
+
+- Their survival time has been truncated.  For this reason we might not want to estimate the mean survival time, but rather some other measure of typical survival time.  Below we explore using the median as well as the 25% trimmed mean.   (From ISCAM Chance & Rossman, Investigation 4.5.3)
+
+---
+
+## The data
+```{r echo = FALSE}
+heroin <- readr::read_table2("http://www.rossmanchance.com/iscam2/data/heroin.txt")
+heroin %>%
+  select(-prison)
+```
+
+---
+
+## Observed Test Statistic(s)
+```{r}
+heroin %>%
+  summarize(obs_med = median(times), 
+            obs_tr_mean = mean(times, trim = 0.25))
+
+```
+
+---
+
+
+## Bootstrapped data!
+```{r}
+set.seed(4747)
+
+heroin %>% 
+  sample_frac(size=1, replace=TRUE) %>%
+  summarize(boot_med = median(times), 
+            boot_tr_mean = mean(times, trim = 0.25))
+
+```
+
+---
+
+
+##  Need to bootstrap a lot of times...
+Bootstrapping with `map`. 
+
+.panelset[
+
+.panel[.panel-name[set variables]
+```{r}
+n_rep1 <- 100
+n_rep2 <- 20
+set.seed(4747)
+```
+]
+
+.panel[.panel-name[boot stat function]
+```{r}
+boot_stat_func <- function(df){ 
+	df %>% 
+    mutate(obs_med = median(times),
+           obs_tr_mean = mean(times, trim = 0.25)) %>%
+    sample_frac(size=1, replace=TRUE) %>%
+    summarize(boot_med = median(times), 
+              boot_tr_mean = mean(times, trim = 0.25),
+              obs_med = mean(obs_med),
+              obs_tr_mean = mean(obs_tr_mean))}
+```
+]
+
+.panel[.panel-name[resample function]
+```{r}
+boot_1_func <- function(df){
+  df %>% 
+    sample_frac(size=1, replace=TRUE)
+}
+```
+]
+
+.panel[.panel-name[bootstrapping]
+```{r}
+map_df(1:n_rep1, ~boot_stat_func(df = heroin))
+```
+]
+
+]
+
+
+---
+
+
+## What do the **data** distributions look like?
+
+```{r echo=FALSE, fig.width=4}
+heroin %>% 
+  ggplot(aes(x=times)) + ylab("") +
+  geom_histogram(bins=30) + 
+  ggtitle("original sample")
+
+heroin %>%
+  boot_1_func() %>%
+  ggplot(aes(x=times)) + ylab("") +
+  geom_histogram(bins=30) + 
+  ggtitle("one bootstrap resample")
+```
+
+
+---
+
+## What do the **sampling** distributions look like?
+
+Both the median and the trimmed mean are reasonably symmetric and bell-shaped.  
+
+.pull-left[
+```{r echo=FALSE, fig.width=4, fig.height=6}
+boot_stats <- map_df(1:n_rep1, ~boot_stat_func(df = heroin))
+
+ggplot(boot_stats, aes(x=boot_med)) + 
+  geom_histogram(bins=20) + 
+  ggtitle("dist of median") +  ylab("") +
+  xlim(c(300, 475)) +
+  geom_vline(aes(xintercept = mean(boot_med))) 
+  #xlab(paste("mean=",round(mean(boot_med),2),";
+  #           SE=", round(sd(boot_med),2)))
+```
+]
+
+.pull-right[
+```{r echo=FALSE, fig.width=4, fig.height=6}
+ggplot(boot_stats, aes(x=boot_tr_mean)) + 
+  geom_histogram(bins=20) + 
+  ggtitle("dist of trimmed mean") +  ylab("") +
+  xlim(c(300, 475)) +
+  geom_vline(aes(xintercept = mean(boot_med))) 
+  #xlab(paste("mean=",round(mean(boot_tr_mean),2),";
+  #           SE=", round(sd(boot_tr_mean),2)))
+
+```
+]
+
+---
+
+# Agenda 10/7/21
+
+
+1. Normal CI using BS SE
+2. Bootstrap-t (studentized) CIs 
+3. Percentile CIs
+4. properties / advantages / disadvantages
+
+---
+
+## Technical derivations
+
+See in class notes on [bootstrapping](http://st47s.com/Math154/Notes/boot.html) for the technical details on how to create different bootstrap intervals.
+
+---
+
+## Bootstrapping with `map`
+
+.panelset[
+
+.panel[.panel-name[set variables]
+```{r}
+n_rep1 <- 100
+set.seed(4747)
+```
+]
+
+.panel[.panel-name[boot stat function]
+```{r}
+boot_stat_func <- function(df){ 
+	df %>% 
+    mutate(obs_med = median(times),
+           obs_tr_mean = mean(times, trim = 0.25)) %>%
+    sample_frac(size=1, replace=TRUE) %>%
+    summarize(boot_med = median(times), 
+              boot_tr_mean = mean(times, trim = 0.25),
+              obs_med = mean(obs_med),
+              obs_tr_mean = mean(obs_tr_mean))}
+```
+]
+
+
+.panel[.panel-name[bootstrap!]
+```{r}
+boot_stats <- map_df(1:n_rep1, ~boot_stat_func(df = heroin))
+
+boot_stats
+```
+
+]
+
+]
+
+---
+
+
+## 95% normal CI with BS SE
+
+```{r}
+boot_stats %>%
+  summarize(low_med = mean(obs_med) + qnorm(0.025) * sd(boot_med), 
+         up_med = mean(obs_med) + qnorm(0.975) * sd(boot_med),
+         low_tr_mean = mean(obs_tr_mean) + qnorm(0.025) * sd(boot_tr_mean), 
+         up_tr_mean = mean(obs_tr_mean) + qnorm(0.975) * sd(boot_tr_mean))
+```
+
+---
+
+
+## 95% Percentile CI
+
+```{r}
+boot_stats %>%
+  summarize(perc_CI_med = quantile(boot_med, c(0.025, 0.975)), 
+            perc_CI_tr_mean = quantile(boot_tr_mean, c(0.025, 0.975)), 
+            q = c(0.025, 0.975))
+```
+
+---
+
+## Double bootstrapping with `map`
+
+.panelset[
+
+.panel[.panel-name[set variables]
+```{r}
+n_rep1 <- 100
+n_rep2 <- 20
+set.seed(4747)
+```
+]
+
+.panel[.panel-name[boot stat function]
+```{r}
+boot_stat_func <- function(df){ 
+	df %>% 
+    mutate(obs_med = median(times),
+           obs_tr_mean = mean(times, trim = 0.25)) %>%
+    sample_frac(size=1, replace=TRUE) %>%
+    summarize(boot_med = median(times), 
+              boot_tr_mean = mean(times, trim = 0.25),
+              obs_med = mean(obs_med),
+              obs_tr_mean = mean(obs_tr_mean))}
+```
+]
+
+.panel[.panel-name[resample function]
+```{r}
+boot_1_func <- function(df){
+  df %>% 
+    sample_frac(size=1, replace=TRUE)
+}
+```
+]
+
+.panel[.panel-name[re-resample function]
+```{r}
+boot_2_func <- function(df, reps){
+  resample2 <- 1:reps
+  df %>%
+    summarize(boot_med = median(times), boot_tr_mean = mean(times, trim = 0.25)) %>%
+    cbind(resample2, map_df(resample2, ~df %>% 
+             sample_frac(size=1, replace=TRUE) %>%
+             summarize(boot_2_med = median(times), 
+                       boot_2_tr_mean = mean(times, trim = 0.25)))) %>%
+    select(resample2, everything())
+}
+```
+]
+
+.panel[.panel-name[double bootstrap!]
+```{r}
+boot_2_stats <- data.frame(resample1 = 1:n_rep1) %>%
+  mutate(first_boot = map(1:n_rep1, ~boot_1_func(df = heroin))) %>%
+  mutate(second_boot = map(first_boot, boot_2_func, reps = n_rep2)) 
+```
+
+```{r eval = FALSE, include = FALSE}
+boot_2_stats #%>%
+  #unnest(second_boot) %>%
+  #unnest(first_boot)
+```
+
+]
+
+]
+
+
+---
+
+## Summarizing the double bootstrap
+
+.panelset[
+
+.panel[.panel-name[results]
+```{r}
+boot_2_stats %>%
+  unnest(second_boot) %>%
+  unnest(first_boot) 
+```
+]
+
+.panel[.panel-name[summary for resample 1]
+```{r eval = FALSE}
+boot_2_stats %>%
+  unnest(second_boot) %>%
+  unnest(first_boot) %>%
+  filter(resample1 == 1) 
+```
+
+```{r echo = FALSE}
+boot_2_stats %>%
+  unnest(second_boot) %>%
+  unnest(first_boot) %>%
+  select(resample1, resample2, everything() ) %>%
+  filter(resample1 == 1) %>%
+  select(boot_med, boot_tr_mean, boot_2_med, boot_2_tr_mean) %>%
+  skim_without_charts() %>% as_tibble() %>% 
+  select(skim_variable, numeric.mean, numeric.sd, numeric.p50)
+```
+]
+
+
+.panel[.panel-name[summary for all resamples]
+
+```{r}
+boot_t_stats <- boot_2_stats %>%
+  unnest(second_boot) %>%
+  unnest(first_boot) %>%
+  group_by(resample1) %>%
+  summarize(boot_sd_med = sd(boot_2_med),
+            boot_sd_tr_mean = sd(boot_2_tr_mean),
+            boot_med = mean(boot_med),  # doesn't do anything, just copies over
+            boot_tr_mean = mean(boot_tr_mean))  %>% # the variables into the output
+  mutate(boot_t_med = (boot_med - mean(boot_med)) / boot_sd_med,
+            boot_t_tr_mean = (boot_tr_mean - mean(boot_tr_mean)) / boot_sd_tr_mean)
+
+  
+boot_t_stats
+
+```
+
+]
+]
+
+
+
+---
+
+
+
+## 95% Bootstrap-t CI
+
+
+Note that the t-value is needed (which requires a different SE for each bootstrap sample).
+
+.panelset[
+
+.panel[.panel-name[t-values]
+```{r}
+boot_t_stats %>%
+  select(boot_t_med, boot_t_tr_mean)
+```
+]
+
+.panel[.panel-name[multipliers]
+```{r}
+boot_q <- boot_t_stats %>%
+  select(boot_t_med, boot_t_tr_mean) %>%
+  summarize(q_t_med = quantile(boot_t_med, c(0.025, 0.975)), 
+            q_t_tr_mean = quantile(boot_t_tr_mean, c(0.025, 0.975)),
+            q = c(0.025, 0.975))
+
+boot_q
+```
+]
+
+
+.panel[.panel-name[pull numbers]
+```{r}
+boot_q_med <- boot_q %>% select(q_t_med) %>% pull()
+boot_q_med
+
+boot_q_tr_mean <- boot_q %>% select(q_t_tr_mean) %>% pull()
+boot_q_tr_mean
+
+```
+]
+
+.panel[.panel-name[BS-t CI]
+```{r}
+boot_t_stats %>%
+  summarize(boot_t_CI_med = mean(boot_med) + 
+                                  boot_q_med*sd(boot_med),
+            boot_t_CI_tr_mean = mean(boot_tr_mean) + 
+                                  boot_q_tr_mean * sd(boot_tr_mean),
+            q = c(0.025, 0.975))
+
+```
+]
+
+]
+
+---
+
+## Comparison of intervals
+
+The first three columns  correspond to the CIs for the true median of the survival times.  The second three columns correspond to the CIs for the true trimmed mean of the survival times.
+
+
+CI | lower | obs Med | upper | lower | obs Tr Mean | upper
+--- | ----- | ----- | ----- | ----- | ------ | -------- | 
+Percentile | 321 | 367.50| 434.58 | 334.86 | 378.30 | 429.77
+w BS SE | 309.98 | 367.50| 425.01 | 336.90 | 378.30 | 419.77
+BS-t | 309.30 | 367.50| 425.31 | 331.02 | 378.30 | 421.17
+
+---
+
+## What makes a confidence interval procedure good?
+
+1. That it captures the true parameter in $1-\alpha \cdot$ 100% of the datasets.
+
+2. That it produces narrow intervals.
+
+---
+
+## What else about intervals?
+
+| CI 	| Symmetric 	| Range Resp 	| Trans Resp 	| Accuracy 	| Normal Samp Dist? 	| Other 	|
+|:-----:	|:---------:	|:----------:	|:----------:	|:--------------:	|:-----------------:	|------------------------------------	|
+| Boot SE 	| Yes 	| No 	| No 	| $1^{st}$ order 	| Yes 	| param assump $F(\hat{\theta})$ 	|
+| Boot-t 	| No 	| No 	| No 	| $2^{nd}$ order 	| Yes/No 	| computer intensive 	|
+| perc 	| No 	| Yes 	| Yes 	| $1^{st}$ order 	| No 	| small $n \rightarrow$ low accuracy 	|
+| BCa 	| No 	| Yes 	| Yes 	| $2^{nd}$ order 	| No 	| limited param assump 	|
+
+
+
+
