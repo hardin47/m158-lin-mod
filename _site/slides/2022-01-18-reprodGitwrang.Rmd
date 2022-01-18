@@ -46,7 +46,6 @@ options(width=65)
 2. Workflow
 3. Wrangling
 4. Statistics
-5. What is a Linear Model?
 
 ---
 
