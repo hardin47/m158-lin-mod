@@ -14,9 +14,11 @@ output: distill::distill_article
 # Computational Statistics
 ## Math 158, Spring 2022
 
-Jo Hardin
-2351 Estella
-jo.hardin@pomona.edu
+Class: Tuesdays & Thursdays, 2:45 - 4pm  
+
+Jo Hardin  
+2351 Estella  
+jo.hardin@pomona.edu  
 
 **Office Hours:** (Zoom + Estella 2351)  
 Tuesday 9:30-11am  
@@ -25,8 +27,8 @@ Thurs 10-11:30am
 
 
 **Mentor Sessions:** Estella 2131   
-6-8pm Mondays and Thursdays
-Mentor: Lauren Quesada 
+6-8pm Mondays and Thursdays  
+Mentor: Lauren Quesada   
 
 
 ```{r fig.cap = "Artwork by @allison_horst.", fig.alt = "Monsters going through the phases of writing code.", preview = TRUE, echo = FALSE}
