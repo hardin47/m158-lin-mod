@@ -11,7 +11,7 @@ output: distill::distill_article
 ---
 
 
-# Computational Statistics
+# Linear Models
 ## Math 158, Spring 2022
 
 Class: Tuesdays & Thursdays, 2:45 - 4pm  
