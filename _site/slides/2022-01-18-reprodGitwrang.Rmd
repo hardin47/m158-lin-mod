@@ -230,8 +230,8 @@ knitr::include_graphics("../images/cookingRstudio.jpg")
      + New Project, version control, Git  
      + Clone the repo using SSH  
 3. If it exists, rename the Rmd file to ma158-hw#-lname-fname.Rmd  
-4. Do the assignment  
-     + **commit** and **push** after every problem  
+4. Do the assignment, **knit** in RStudio (knit early and often!)
+4. **commit** and **push** to GitHub (after completing the assingment, possibly more often)  
 5. All necessary files *must* be in the same folder (e.g., data)  
 
 ---
