@@ -13,13 +13,27 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::include_graphics("images/project.png")
 ```
 
-# Project Instructions
+# Semester Project
+
+The semester project will be broken down into 4 sections.  Each part will get successively more technical (and worth more points of the overall project grade).  The due dates are given below.  Click on the appropriate full instructions to see the assignment for each part.
+
+* 2/8/22 (Tuesday) Part 1: Data
+* 2/15/22 (Tuesday) Part 2: SLR
+* 4/5/22 (Tuesday) Part 3: MLR
+* 5/10/22 (Tuesday) Part 4: Beyond linear + summary
 
 
-More soon
 
+## Part 1 (worth 10 pts)
 
+* <a href="https://m158-lin-mod.netlify.app/slides/proj1_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Semester Project Part 1: Data</a>, full instructions.
 
+The goal of this data assignment is to understand the variables in your dataset and their con- nections with each other. Your task is to collect and describe a set of data of your choice and to perform some descriptive statistical analyses. The hardest part will be finding an appropriate dataset to use. Additionally, you will want to think carefully about the observational units (rows) in the dataset, they must be independent.
 
+## Part 2 (worth 20 pts)
+
+## Part 3 (worth 30 pts)
+
+## Part 4 (worth 40 pts)
 
 

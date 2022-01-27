@@ -9,5 +9,52 @@ output: distill::distill_article
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-more soon
+
+# Evaluation Criteria
+
+The following guidelines will be used to evaluate reports.^[Adapted from Christina Knudson, Department of Mathematics, University of St. Thomas, Stat 333]
+
+
+### An A-range paper will:
+
+* show careful, creative, and critical thinking about the topic, questions, and results.  
+* include appropriate references.
+* be clear, concise, well-organized, and engaging.
+* describe and interpret all important findings in the context of the study.
+* be understandable to someone who has finished Math 158 and received a B or better. 
+* use all technical terms correctly and have informative, carefully-crafted plots that are well-annotated (all plots must have captions).
+* show exemplary understanding of the statistical methods we have discussed. 
+* be grammatically correct. 
+* look professional with no superfluous R code.
+* follow all instructions.
+
+### A B-range paper will:
+
+* usually display careful, creative, and critical thinking but might have a few lapses.  
+* be described accurately by at least 2 of the following descriptors: clear, concise, well-organized, and engaging.
+* be {\em mostly} understandable to someone who has finished Math 158 and received a B or better. 
+* describe and interpret all important statistical findings in the context of the study.
+* show a solid understanding of the statistical methods we have discussed. 
+* have references that are possibly incomplete.
+* have plots that are good but not great (e.g., axes could be better labeled).
+* usually use technical terms correctly. 
+* have grammar that is usually correct, with maybe only a couple errors. 
+* have only a few typos.
+* have very few lapses with respect to superfluous R code.
+* follow all instructions.
+
+### A C-range paper might have **some** of the following problems:
+* the included plots are problematic (e.g., uninformative axis labels) or barely relevant.
+* no display of  consistent careful and critical thinking.   
+* no appropriate references.
+* technical terms that are used incorrectly several times. 
+* be described accurately by only 1 of the following descriptors: clear, concise, well-organized, and engaging.
+* be mostly inaccessible to someone who has finished Math 158 and received a B or better. 
+* no description/interpretation of important statistical findings in the context of the study.
+* an incomplete understanding of the statistical methods discussed in class. 
+* a paper in need of basic editing: it may contain several typos and/or grammatical errors.
+
+
+
+An unsatisfactory paper (D or F) might be incomplete or might have many of the problems that affect the C-range papers.
 
