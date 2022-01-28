@@ -32,37 +32,41 @@ Each week, follow the general process outlined below:
 
 ```{r echo = FALSE}
 schedule <- tribble(
-  ~`date`, ~topic, ~agenda, ~readings, ~slides, ~article,
+  ~`date`, ~topic, ~agenda, ~readings, ~`in class`, ~article,
   "Week 1 <br> 1.18.22", 'starting + <br> R + RStudio + <br> Git + GitHub + <br> SLR',"$\\boldsymbol{\\cdot}$course info <br> $\\boldsymbol{\\cdot}$R + Git <br> $\\boldsymbol{\\cdot}$what is a linear model? <br> $\\boldsymbol{\\cdot}$least squares <br> $\\boldsymbol{\\cdot}$norm errors <br> $\\boldsymbol{\\cdot}$tech cond", 
   '<a href="https://st47s.com/Math158/Notes/intro.html" target = "_blank"><i class="fas fa-book-open"></i> Introduction</a> <br> <a href="https://m58-intro-stats.netlify.app/github.html" target = "_blank"><i class="fas fa-book-open"></i> Git + GitHub</a> <br> <i class="fas fa-book-open"></i> ALSM 1 <br> <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 3.1 </a>',
-  '<a href="https://m158-lin-mod.netlify.app/slides/2022-01-18-reprodGitwrang.html" target = "_blank"><i class="fas fa-desktop"></i> Git + Tidy</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu1_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 1</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu2_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 2</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/2022-01-18-reprodGitwrang.html" target = "_blank"><i class="fas fa-desktop"></i> Git + Tidy</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu1_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 1</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu2_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 2</a>  <br> <a href = "http://www.rossmanchance.com/applets/2021/regshuffle/regshuffle.htm" target = "_blank"><i class = "fas fa-gamepad"></i> least sq</a>',
   '<a href="https://happygitwithr.com/" target = "_blank"><i class="fa fa-comments"></i> happygitwithR</a>',
   
-    "Week 2 <br> 1.25.22", 'Inference',"$\\boldsymbol{\\cdot}$Inf on $\\beta_1$ <br> $\\boldsymbol{\\cdot}$CI for $\\beta_1$ <br> $\\boldsymbol{\\cdot}$CI for mean <br> $\\boldsymbol{\\cdot}$PI for indiv<br> $\\boldsymbol{\\cdot}$ correlation<br> $\\boldsymbol{\\cdot}$ $R^2$", 
+    "Week 2 <br> 1.25.22", 'Inference',"$\\boldsymbol{\\cdot}$Inf on $\\beta_1$ <br> $\\boldsymbol{\\cdot}$CI for $\\beta_1$ <br> $\\boldsymbol{\\cdot}$CI for mean <br> $\\boldsymbol{\\cdot}$PI for indiv<br> $\\boldsymbol{\\cdot}$ correlation", 
   '<a href="https://st47s.com/Math158/Notes/slr.html" target = "_blank"><i class="fas fa-book-open"></i> SLR</a>  <br> <i class="fas fa-book-open"></i> ALSM 2',
-  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu3_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 3</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu4_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 4</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/wu3_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 3</a> <br> <a href = "http://www.rossmanchance.com/applets/2021/regshuffle/regshuffle.htm" target = "_blank"><i class = "fas fa-gamepad"></i> dist $\\beta_1$</a>',
   
+  '',
+    "Week 3 <br> 2.1.22", 'Diagnositcs',"$\\boldsymbol{\\cdot}$ $R^2$ <br> $\\boldsymbol{\\cdot}$ F test<br> ", 
+  '<a href="https://st47s.com/Math158/Notes/diag1.html" target = "_blank"><i class="fas fa-book-open"></i> Diagnostics I</a><br><i class="fas fa-book-open"></i> ALSM 3',
+  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu4_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 4</a><br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
-    "Week 3 <br> 2.1.22", 'Diagnositcs',"$\\boldsymbol{\\cdot}$ <br> ", 
-  '<a href="https://st47s.com/Math158/Notes/diag1.html" target = "_blank"><i class="fas fa-book-open"></i> Diagnostics I</a><br>  <br> <i class="fas fa-book-open"></i> ALSM 3',
-  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
-  '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
+  
     "Week 4 <br> 2.8.22", 'Simultaneous <br> Inference + <br> Matrices',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="https://st47s.com/Math158/Notes/simult.html" target = "_blank"><i class="fas fa-book-open"></i> Simult Inf</a>   <br> <a href="https://st47s.com/Math158/Notes/la.html" target = "_blank"><i class="fas fa-book-open"></i> Matrices</a>   <br> <i class="fas fa-book-open"></i> ALSM 4 & 5',
-  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
+  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a>  <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
-    '<font color = "#114B5F"><b>2.8.22</b></font>', '<font color = "#114B5F"><b>Proj 1: Data</b></font>',"", 
-  '',
+    '<font color = "#114B5F"><b>2.8.22</b></font>', '<font color = "#114B5F"><b>Proj 1: Data</b></font>',
   '<a href="https://m158-lin-mod.netlify.app/slides/proj1_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 1: Data</a>',
+  '',"", 
   '',
+  
+  
     "Week 5 <br> 2.15.22", 'MLR',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="https://st47s.com/Math158/Notes/mlr.html" target = "_blank"><i class="fas fa-book-open"></i> MLR</a>  <br> <i class="fas fa-book-open"></i> ALSM 6 <br> <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 3.2 </a>',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
-   '<font color = "#114B5F"><b>2.15.22</b></font>', '<font color = "#114B5F"><b>Proj 2: SLR</b></font>',"", 
-  '',
+   '<font color = "#114B5F"><b>2.15.22</b></font>', '<font color = "#114B5F"><b>Proj 2: SLR</b></font>',
   '<a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 2: SLR</a>',
+  '',"", 
   '',
+  
       "Week 6 <br> 2.22.22", 'catch-up',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="" target = "_blank"><i class="fas fa-book-open"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-book-open"></i></a>',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
@@ -95,9 +99,9 @@ schedule <- tribble(
   '<a href="https://st47s.com/Math158/Notes/shrink.html" target = "_blank"><i class="fas fa-book-open"></i> Ridge</a> <br> <i class="fas fa-book-open"></i> ALSM 11.2<br> <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 6.2 </a>',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',  
-    '<font color = "#114B5F"><b>4.5.22</b></font>', '<font color = "#114B5F"><b>Proj 3: MLR</b></font>',"", 
-  '',
+    '<font color = "#114B5F"><b>4.5.22</b></font>', '<font color = "#114B5F"><b>Proj 3: MLR</b></font>',
   '<a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 3: MLR</a>',
+  '',"", 
   '',
      "Week 12 <br> 4.12.22", 'catch-up',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="" target = "_blank"><i class="fas fa-book-open"></i></a>',
@@ -119,9 +123,9 @@ schedule <- tribble(
   '',
   '',
   '',    
-    '<font color = "#114B5F"><b>5.10.22</b></font>', '<font color = "#114B5F"><b>Proj 4: Beyond<br>Linear + <br>Summary</b></font>',"", 
-  '',
+    '<font color = "#114B5F"><b>5.10.22</b></font>', '<font color = "#114B5F"><b>Proj 4: Beyond<br>Linear + <br>Summary</b></font>',
   '<a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 4: Fin</a>',
+  '',"", 
   ''
   )
 ```
