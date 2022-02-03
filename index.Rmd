@@ -43,9 +43,9 @@ schedule <- tribble(
   '<a href="https://m158-lin-mod.netlify.app/slides/wu3_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 3</a> <br> <a href = "http://www.rossmanchance.com/applets/2021/regshuffle/regshuffle.htm" target = "_blank"><i class = "fas fa-gamepad"></i> dist $\\beta_1$</a>',
   
   '',
-    "Week 3 <br> 2.1.22", 'Diagnositcs',"$\\boldsymbol{\\cdot}$ $R^2$ <br> $\\boldsymbol{\\cdot}$ F test<br> ", 
+    "Week 3 <br> 2.1.22", 'Diagnositcs',"$\\boldsymbol{\\cdot}$ $R^2$ <br> $\\boldsymbol{\\cdot}$ F test<br> $\\boldsymbol{\\cdot}$ residual<br> plots", 
   '<a href="https://st47s.com/Math158/Notes/diag1.html" target = "_blank"><i class="fas fa-book-open"></i> Diagnostics I</a><br><i class="fas fa-book-open"></i> ALSM 3',
-  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu4_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 4</a><br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/wu4_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 4</a><br> <a href="https://m158-lin-mod.netlify.app/slides/wu5_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 5</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
   
     "Week 4 <br> 2.8.22", 'Simultaneous <br> Inference + <br> Matrices',"$\\boldsymbol{\\cdot}$ <br> ", 
