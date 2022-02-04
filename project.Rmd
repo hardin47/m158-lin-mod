@@ -23,6 +23,9 @@ The semester project will be broken down into 4 sections.  Each part will get su
 * 5/10/22 (Tuesday) Part 4: Beyond linear + summary
 
 
+## Data
+
+You might consider looking at some of these places to find a dataset:  <a href = "https://hardin47.netlify.app/courses/data/" target = "_blank">https://hardin47.netlify.app/courses/data/</a>
 
 ## Part 1 (worth 10 pts)
 
