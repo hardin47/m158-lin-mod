@@ -50,7 +50,7 @@ schedule <- tribble(
   
     "Week 4 <br> 2.8.22", 'Simultaneous <br> Inference + <br> Matrices',"$\\boldsymbol{\\cdot}$ $\\beta_0$ & $\\beta_1$<br> $\\boldsymbol{\\cdot}$ linear algebra", 
   '<a href="https://st47s.com/Math158/Notes/simult.html" target = "_blank"><i class="fas fa-book-open"></i> Simult Inf</a>   <br> <a href="https://st47s.com/Math158/Notes/la.html" target = "_blank"><i class="fas fa-book-open"></i> Matrices</a>   <br> <i class="fas fa-book-open"></i> ALSM 4 & 5',
-  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a>  <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/wu6_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 6</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu7_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 7</a>',
   '<a href="https://github.com/jtleek/reviews" target = "_blank"><i class="fa fa-comments"></i> Peer review</a>',
     '<font color = "#114B5F"><b>2.8.22</b></font>', '<font color = "#114B5F"><b>Proj 1: Data</b></font>',
   '<a href="https://m158-lin-mod.netlify.app/slides/proj1_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 1: Data</a>',
@@ -64,7 +64,7 @@ schedule <- tribble(
   '<a href="https://www.fastcompany.com/3039412/the-art-science-to-giving-and-receiving-criticism-at-work" target = "_blank"><i class="fa fa-comments"></i> Criticism</a>',
   
    '<font color = "#114B5F"><b>2.20.22</b></font>', '<font color = "#114B5F"><b>Proj 2: SLR</b></font>',
-  '<a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 2: SLR</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/proj2_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 2: SLR</a>',
   '',"", 
   '',
   
@@ -80,6 +80,12 @@ schedule <- tribble(
   '<a href="https://st47s.com/Math158/Notes/mlr.html" target = "_blank"><i class="fas fa-book-open"></i> MLR</a> <br> <i class="fas fa-book-open"></i> ALSM 7 </a>',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
+  
+  '<font color = "#114B5F"><b>3.3.22</b></font>', '<font color = "#114B5F"><b>Peer 2: SLR</b></font>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/proj2_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Peer Review: SLR</a> <br>on GitHub',
+  '',"", 
+  '',
+  
     "Week 8 <br> 3.8.22", 'Model <br> Building',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="https://st47s.com/Math158/Notes/build.html" target = "_blank"><i class="fas fa-book-open"></i> Build</a> <br> <i class="fas fa-book-open"></i> ALSM 9<br> <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 6.1 </a>',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
