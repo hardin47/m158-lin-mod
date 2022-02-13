@@ -38,7 +38,7 @@ The goal of this data assignment is to understand the variables in your dataset 
 
 ## Part 2 (worth 20 pts)
 
-* <a href="https://m158-lin-mod.netlify.app/slides/proj2_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Semester Project Part 2: SLR</a>, full instructions.
+* <a href="https://m158-lin-mod.netlify.app/slides/proj2_slr_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Semester Project Part 2: SLR</a>, full instructions.
 
 Your task for the SLR project is to apply the tools of simple linear regression in order to answer questions about the relationship between two continuous (quantitative) variables.  After the report is turned in, your pair (or you solo) will assess a different project based on the questions included in the full instructions.  It is in your best interest to read those questions before writing up your analysis!
 
