@@ -64,7 +64,7 @@ schedule <- tribble(
   '<a href="https://www.fastcompany.com/3039412/the-art-science-to-giving-and-receiving-criticism-at-work" target = "_blank"><i class="fa fa-comments"></i> Criticism</a>',
   
    '<font color = "#114B5F"><b>2.20.22</b></font>', '<font color = "#114B5F"><b>Proj 2: SLR</b></font>',
-  '<a href="https://m158-lin-mod.netlify.app/slides/proj2_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 2: SLR</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/proj2_slr_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 2: SLR</a>',
   '',"", 
   '',
   
@@ -82,7 +82,7 @@ schedule <- tribble(
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
   
   '<font color = "#114B5F"><b>3.3.22</b></font>', '<font color = "#114B5F"><b>Peer 2: SLR</b></font>',
-  '<a href="https://m158-lin-mod.netlify.app/slides/proj2_data_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Peer Review: SLR</a> <br>on GitHub',
+  '<a href="https://m158-lin-mod.netlify.app/slides/proj2_slr_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Peer Review: SLR</a> <br>on GitHub',
   '',"", 
   '',
   
