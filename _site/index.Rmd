@@ -58,7 +58,7 @@ schedule <- tribble(
   '',
   
   
-    "Week 5 <br> 2.15.22", 'MLR',"$\\boldsymbol{\\cdot}$ indicator terms<br> $\\boldsymbol{\\cdot}$ interaction terms<br> $\\boldsymbol{\\cdot}$ quadratic terms<br>", 
+    "Week 5 <br> 2.15.22", 'MLR',"$\\boldsymbol{\\cdot}$ indicator terms<br> $\\boldsymbol{\\cdot}$ interaction terms<br> $\\boldsymbol{\\cdot}$ quadratic terms<br>$\\boldsymbol{\\cdot}$ F test <br> $\\boldsymbol{\\cdot}$ $R^2$ & $R^2_{adj}$ <br> $\\boldsymbol{\\cdot}$ combos of coefs", 
   '<a href="https://st47s.com/Math158/Notes/mlr.html" target = "_blank"><i class="fas fa-book-open"></i> MLR</a>  <br> <i class="fas fa-book-open"></i> ALSM 6 <br> <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 3.2 </a>',
   '<a href="https://m158-lin-mod.netlify.app/slides/wu8_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 8</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu9_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 9</a>',
   '<a href="https://www.fastcompany.com/3039412/the-art-science-to-giving-and-receiving-criticism-at-work" target = "_blank"><i class="fa fa-comments"></i> Criticism</a>',
