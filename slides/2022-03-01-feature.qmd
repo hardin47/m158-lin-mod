@@ -27,13 +27,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Welcome
-
-## Announcements
-
-::: nonincremental
--   My Monday office hours moved to 8-9pm
-:::
 
 ## Topics
 
