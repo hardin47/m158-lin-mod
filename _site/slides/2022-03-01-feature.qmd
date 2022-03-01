@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 ```
 
 
-## Topics
+## Agenda
 
 ::: nonincremental
 -   Feature engineering with recipes
@@ -50,13 +50,15 @@ ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
 
 # Comparing Models
 
-```{r fig.align='center', echo=FALSE, out.width="10%"}
+```{r fig.align='center', echo=FALSE}
 knitr::include_graphics("figs/blackbox.jpeg")
 ```
 
-> 1. Data Modeling: The analysis in this culture starts with assuming a stochastic data model for the inside of the black box...The values of the parameters are estimated from the data and the model then used for information and/or prediction
+1. Data Modeling: The analysis in this culture starts with assuming a stochastic data model for the inside of the black box...The values of the parameters are estimated from the data and the model then used for information and/or prediction
 
-> 2. Algorithmic Modeling: The analysis in this culture considers the inside of the box complex and unknown. [The] approach is to find a function f(x) — an algorithm that operates on x to predict the responses y.
+2. Algorithmic Modeling: The analysis in this culture considers the inside of the box complex and unknown. [The] approach is to find a function f(x) — an algorithm that operates on x to predict the responses y.
+
+
 
 Reference: Leo Breiman (2001)
 
@@ -386,7 +388,7 @@ office_wflow
 office_fit <- office_wflow %>%
   fit(data = office_train)
 
-tidy(office_fit)
+office_fit %>% tidy()
 ```
 
 <br>
@@ -400,7 +402,7 @@ tidy(office_fit)
 ```{r}
 #| echo: true
 
-tidy(office_fit) %>% print(n = 21)
+office_fit %>% tidy() %>% print(n = 21)
 ```
 
 # Evaluate model
@@ -504,7 +506,7 @@ RMSE of model fit to **testing** data
 rmse(office_test_pred, truth = imdb_rating, estimate = .pred)
 ```
 
-R-sq of model fit to **testing** data
+$R^2$ of model fit to **testing** data
 
 ```{r}
 #| echo: true
@@ -535,7 +537,7 @@ rsq_test <- rsq(office_test_pred, truth = imdb_rating, estimate = .pred) %>%
 | metric    |          train |          test | comparison                    |
 |:----------|---------------:|--------------:|:------------------------------|
 | RMSE      | `r rmse_train` | `r rmse_test` | RMSE lower for training       |
-| R-squared |  `r rsq_train` |  `r rsq_test` | R-squared higher for training |
+| $R^2$ |  `r rsq_train` |  `r rsq_test` | $R^2$ higher for training |
 
 ## Evaluating performance on training data {.smaller}
 

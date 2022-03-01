@@ -400,8 +400,8 @@
   <p class="author">Jo Hardin (from Mine Çetinkaya-Rundel)</p>
 </section>
 
-<section id="topics" class="slide level2">
-<h2>Topics</h2>
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
 <div>
 <ul>
 <li>Feature engineering with recipes</li>
@@ -417,11 +417,9 @@
 <section id="comparing-models" class="title-slide slide level1 center">
 <h1>Comparing Models</h1>
 
-<img data-src="figs/blackbox.jpeg" style="width:10.0%" class="r-stretch quarto-figure-center"><ol type="1">
-<li>Data Modeling: The analysis in this culture starts with assuming a stochastic data model for the inside of the black box…The values of the parameters are estimated from the data and the model then used for information and/or prediction</li>
-</ol>
-<ol start="2" type="1">
-<li>Algorithmic Modeling: The analysis in this culture considers the inside of the box complex and unknown. [The] approach is to find a function f(x) — an algorithm that operates on x to predict the responses y.</li>
+<img data-src="figs/blackbox.jpeg" style="width:90.0%" class="r-stretch quarto-figure-center"><ol type="1">
+<li class="fragment"><p>Data Modeling: The analysis in this culture starts with assuming a stochastic data model for the inside of the black box…The values of the parameters are estimated from the data and the model then used for information and/or prediction</p></li>
+<li class="fragment"><p>Algorithmic Modeling: The analysis in this culture considers the inside of the box complex and unknown. [The] approach is to find a function f(x) — an algorithm that operates on x to predict the responses y.</p></li>
 </ol>
 <p>Reference: Leo Breiman (2001)</p>
 </section>
@@ -981,7 +979,7 @@ Computational engine: lm </code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>office_fit <span class="ot">&lt;-</span> office_wflow <span class="sc">%&gt;%</span></span>
 <span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">fit</span>(<span class="at">data =</span> office_train)</span>
 <span id="cb41-3"><a href="#cb41-3"></a></span>
-<span id="cb41-4"><a href="#cb41-4"></a><span class="fu">tidy</span>(office_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-4"><a href="#cb41-4"></a>office_fit <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 21 × 5
    term         estimate std.error statistic  p.value
@@ -1007,7 +1005,7 @@ Computational engine: lm </code></pre>
 <section id="model-fit-summary" class="slide level2">
 <h2>Model fit summary</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">tidy</span>(office_fit) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">21</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>office_fit <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">21</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 21 × 5
    term                estimate std.error statistic  p.value
@@ -1177,7 +1175,7 @@ Computational engine: lm </code></pre>
 1 rmse    standard       0.411</code></pre>
 </div>
 </div>
-<p>R-sq of model fit to <strong>testing</strong> data</p>
+<p><span class="math inline">\(R^2\)</span> of model fit to <strong>testing</strong> data</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">rsq</span>(office_test_pred, <span class="at">truth =</span> imdb_rating, <span class="at">estimate =</span> .pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
@@ -1216,10 +1214,10 @@ Computational engine: lm </code></pre>
 <td style="text-align: left;">RMSE lower for training</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">R-squared</td>
+<td style="text-align: left;"><span class="math inline">\(R^2\)</span></td>
 <td style="text-align: right;">0.67</td>
 <td style="text-align: right;">0.468</td>
-<td style="text-align: left;">R-squared higher for training</td>
+<td style="text-align: left;"><span class="math inline">\(R^2\)</span> higher for training</td>
 </tr>
 </tbody>
 </table>
