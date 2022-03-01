@@ -148,7 +148,7 @@ office_train
 
 office_rec <- recipe(
   imdb_rating ~ .,    # formula
-  data = office_train # data for cataloguing names and types of variables
+  data = office_train # data for cataloging names and types of variables
   )
 
 office_rec

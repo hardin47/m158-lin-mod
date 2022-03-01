@@ -77,8 +77,8 @@ schedule <- tribble(
   '',    
   "Week 7 <br> 3.1.22", 'Feature <br> Engineering <br> & CV',"$\\boldsymbol{\\cdot}$ **tidymodels** <br> $\\boldsymbol{\\cdot}$ feature <br> engineering <br> $\\boldsymbol{\\cdot}$ cross validation", 
   '<a href="http://st47s.com/Math158/Notes/process.html" target = "_blank"><i class="fas fa-book-open"></i> Process</a> <br> <i class="fas fa-book-open"></i> ALSM 7 </a>',
-  '<a href="https://m158-lin-mod.netlify.app/slides/2022-03-01-feature.html" target = "_blank"><i class="fas fa-desktop"></i> Feature Engineering</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/2022-03-03-CV.html" target = "_blank"><i class="fas fa-desktop"></i> Cross Validation</a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
-  '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/2022-03-01-feature.html" target = "_blank"><i class="fas fa-desktop"></i> Feature Engineering</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/2022-03-03-CV.html" target = "_blank"><i class="fas fa-desktop"></i> Cross Validation</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu10_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 10</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu11_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 11</a>',
+  '',
   
   '<font color = "#114B5F"><b>3.3.22</b></font>', '<font color = "#114B5F"><b>Peer 2: SLR</b></font>',
   '<a href="https://m158-lin-mod.netlify.app/slides/proj2_slr_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Peer Review: SLR</a> <br>on GitHub',
