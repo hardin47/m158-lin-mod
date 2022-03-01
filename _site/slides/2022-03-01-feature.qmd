@@ -34,14 +34,10 @@ knitr::opts_chunk$set(
 -   Feature engineering with recipes
 -   Workflows to bring together models and recipes
 -   RMSE and $R^2$ for model evaluation
--   Cross validation
 :::
 
-## Computational setup
 
 ```{r}
-#| echo: true
-
 # load packages
 library(tidyverse)
 library(tidymodels)
@@ -52,11 +48,25 @@ library(knitr)
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
 ```
 
-# Introduction
+# Comparing Models
+
+```{r fig.align='center', echo=FALSE, out.width="10%"}
+knitr::include_graphics("figs/blackbox.jpeg")
+```
+
+> 1. Data Modeling: The analysis in this culture starts with assuming a stochastic data model for the inside of the black box...The values of the parameters are estimated from the data and the model then used for information and/or prediction
+
+> 2. Algorithmic Modeling: The analysis in this culture considers the inside of the box complex and unknown. [The] approach is to find a function f(x) — an algorithm that operates on x to predict the responses y.
+
+Reference: Leo Breiman (2001)
 
 ## The Office
 
-![](images/lec-13/the-office.jpeg)
+```{r fig.align='center', echo=FALSE}
+knitr::include_graphics("figs/the-office.jpeg")
+```
+
+
 
 ## Data & goal
 
@@ -65,8 +75,6 @@ ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
 -   Goal: Predict `imdb_rating` from other variables in the dataset
 
 ```{r}
-#| echo: true
-
 office_ratings <- read_csv(here::here("slides", "data/office_ratings.csv"))
 office_ratings
 ```
@@ -110,7 +118,7 @@ dim(office_test)
 office_train
 ```
 
-## Recap: Feature engineering
+## Feature engineering
 
 -   We prefer simple models when possible, but **parsimony** does not mean sacrificing accuracy (or predictive performance) in the interest of simplicity
 
@@ -118,7 +126,7 @@ office_train
 
 -   **Feature engineering** allows us to get creative with our predictors in an effort to make them more useful for our model (to increase its predictive performance)
 
-## Recap: Modeling workflow, revisited
+## Modeling workflow
 
 -   Create a **recipe** for feature engineering steps to be applied to the training data
 
@@ -181,8 +189,7 @@ office_rec
 . . .
 
 ::: callout-note
-This is optional, we'll show the results for demonstrative purposes.
-It doesn't need to be part of your modeling pipeline, but I find it assuring to see the effects of the recipe steps as I build the recipe.
+Using `prep()` and `bake()` are shown here for demonstrative purposes.  They do not need to be a part of your pipeline.  I do find them assuring, however, so that I can see the effects of the recipe steps as the recipe is built.
 :::
 
 ## Step 2: Prep and bake
@@ -191,6 +198,7 @@ It doesn't need to be part of your modeling pipeline, but I find it assuring to 
 #| echo: true
 
 office_rec_trained <- prep(office_rec)
+
 bake(office_rec_trained, office_train) %>%
   glimpse()
 ```
@@ -219,6 +227,7 @@ office_rec
 #| echo: true
 
 office_rec_trained <- prep(office_rec)
+
 bake(office_rec_trained, office_train) %>%
   glimpse()
 ```
@@ -243,6 +252,7 @@ office_rec
 #| echo: true
 
 office_rec_trained <- prep(office_rec)
+
 bake(office_rec_trained, office_train) %>%
   glimpse()
 ```
@@ -267,6 +277,7 @@ office_rec
 #| echo: true
 
 office_rec_trained <- prep(office_rec)
+
 bake(office_rec_trained, office_train) %>%
   glimpse()
 ```
@@ -291,6 +302,7 @@ office_rec
 #| echo: true
 
 office_rec_trained <- prep(office_rec)
+
 bake(office_rec_trained, office_train) %>%
   glimpse()
 ```
