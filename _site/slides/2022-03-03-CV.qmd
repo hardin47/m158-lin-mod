@@ -1,0 +1,327 @@
+---
+title: "Cross validation"
+subtitle: "Math 158 - Spring 2022"
+author: "Jo Hardin (from Mine Çetinkaya-Rundel)"
+footer: "[https://m158-lin-mod.netlify.app/](https://m158-lin-mod.netlify.app/)"
+logo: "../images/st47s.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+```
+
+
+
+## Agenda
+
+::: nonincremental
+-   Cross validation for model evaluation
+-   Cross validation for model comparison
+:::
+
+
+```{r echo = FALSE}
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+```
+
+## Data & goal {.smaller}
+
+::: nonincremental
+-   Data: The data come from [data.world](https://data.world/anujjain7/the-office-imdb-ratings-dataset), by way of [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-17/readme.md)
+-   Goal: Compare two models which both predict `imdb_rating` from other variables in the dataset
+:::
+
+```{r}
+office_ratings <- read_csv(here::here("slides", "data/office_ratings.csv"))
+office_ratings
+```
+
+# Modeling prep
+
+## Split data into training and testing
+
+```{r}
+set.seed(123)
+office_split <- initial_split(office_ratings)
+office_train <- training(office_split)
+office_test <- testing(office_split)
+```
+
+## Specify model
+
+```{r}
+office_spec <- linear_reg() %>%
+  set_engine("lm")
+
+office_spec
+```
+
+# Model 1
+
+## Your roommate's suggestion
+
+-   Create a recipe that uses the new variables we generated
+-   Denote `episode` as an ID variable and doesn't use `air_date` as a predictor
+-   Consider `season` as a factor variable
+-   Create dummy variables for all nominal predictors
+-   Remove all zero variance predictors
+
+## Your thoughts
+
+-   Create a recipe that uses the new variables we generated
+-   Denote `episode` as an ID variable and doesn't use `air_date` as a predictor
+-   **Consider `season` as numeric**
+-   Create dummy variables for all nominal predictors
+-   Remove all zero variance predictors
+
+## Create recipe 1
+
+```{r}
+office_rec1 <- recipe(imdb_rating ~ ., data = office_train) %>%
+  update_role(title, new_role = "id") %>%
+  step_rm(air_date) %>%
+  step_num2factor(season, levels = as.character(1:9)) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors())
+
+office_rec1
+```
+
+## Create recipe 2
+
+`season` is now numeric
+
+```{r}
+office_rec2 <- recipe(imdb_rating ~ ., data = office_train) %>%
+  update_role(title, new_role = "id") %>%
+  step_rm(air_date) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors())
+
+office_rec2
+```
+
+## Create workflow
+
+```{r}
+office_wflow1 <- workflow() %>%
+  add_model(office_spec) %>%
+  add_recipe(office_rec1)
+
+office_wflow1
+```
+
+## Fit model to training data
+
+. . .
+
+*Actually, not so fast!*
+
+# Cross validation
+
+## Spending our data
+
+-   We have already established that the idea of data spending where the test set was recommended for obtaining an unbiased estimate of performance.
+-   However, we need to decide which model to choose *before using the test set*.
+-   Typically we can't decide on *which* final model to take to the test set without making model assessments.
+-   Remedy: Resampling to make model assessments on training data in a way that can generalize to new data.
+
+## Resampling for model assessment
+
+**Resampling is only conducted on the training set**.
+The test set is not involved.
+For each iteration of resampling, the data are partitioned into two subsamples:
+
+-   The model is fit with the **analysis set**.
+-   The model is evaluated with the **assessment set**.
+
+## Resampling for model assessment
+
+```{r fig.align='center', echo=FALSE}
+knitr::include_graphics("figs/resampling.svg")
+```
+
+<br>
+
+Source: Kuhn and Silge.
+[Tidy modeling with R](https://www.tmwr.org/).
+
+## Analysis and assessment sets
+
+-   Analysis set is analogous to training set.
+-   Assessment set is analogous to test set.
+-   The terms *analysis* and *assessment* avoids confusion with initial split of the data.
+-   These data sets are mutually exclusive.
+
+## Cross validation
+
+More specifically, **v-fold cross validation** -- commonly used resampling technique:
+
+-   Randomly split your **training** **data** into v partitions
+-   Use 1 partition for assessment, and the remaining v-1 partitions for analysis
+-   Repeat v times, updating which partition is used for assessment each time
+
+. . .
+
+Let's give an example where `v = 3`...
+
+## Cross validation, step 1
+
+Randomly split your **training** **data** into 3 partitions:
+
+<br>
+
+```{r fig.align='center', echo=FALSE}
+knitr::include_graphics("figs/three-CV.svg")
+```
+
+
+## Split data
+
+```{r}
+#| echo: true
+
+set.seed(345)
+folds <- vfold_cv(office_train, v = 3)
+folds
+```
+
+## Cross validation, steps 2 and 3
+
+::: nonincremental
+-   Use 1 partition for assessment, and the remaining v-1 partitions for analysis
+-   Repeat v times, updating which partition is used for assessment each time
+:::
+
+```{r fig.align='center', echo=FALSE}
+knitr::include_graphics("figs/three-CV-iter.svg")
+```
+
+## Fit resamples
+
+```{r}
+#| echo: true
+
+set.seed(456)
+
+office_fit_rs1 <- office_wflow1 %>%
+  fit_resamples(folds)
+
+office_fit_rs1
+```
+
+## Cross validation, now what?
+
+-   We've fit a bunch of models
+-   Now it's time to use them to collect metrics (e.g., $R^2$, RMSE) on each model and use them to evaluate model fit and how it varies across folds
+
+## Collect CV metrics
+
+```{r}
+collect_metrics(office_fit_rs1)
+```
+
+## Deeper look into CV metrics
+
+```{r}
+cv_metrics1 <- collect_metrics(office_fit_rs1, summarize = FALSE) 
+
+cv_metrics1
+```
+
+## Better tabulation of CV metrics
+
+```{r}
+cv_metrics1 %>%
+  mutate(.estimate = round(.estimate, 3)) %>%
+  pivot_wider(id_cols = id, names_from = .metric, values_from = .estimate) %>%
+  kable(col.names = c("Fold", "RMSE", "R-squared"))
+```
+
+## How does RMSE compare to y? {.smaller}
+
+Cross validation RMSE stats:
+
+```{r}
+cv_metrics1 %>%
+  filter(.metric == "rmse") %>%
+  summarise(
+    min = min(.estimate),
+    max = max(.estimate),
+    mean = mean(.estimate),
+    sd = sd(.estimate)
+  )
+```
+
+Training data IMDB score stats:
+
+```{r}
+office_ratings %>%
+  summarise(
+    min = min(imdb_rating),
+    max = max(imdb_rating),
+    mean = mean(imdb_rating),
+    sd = sd(imdb_rating)
+  )
+```
+
+## Cross validation jargon
+
+-   Referred to as v-fold or k-fold cross validation
+-   Also commonly abbreviated as CV
+
+## Cross validation, for reals
+
+-   To illustrate how CV works, we used `v = 3`:
+
+    ::: nonincremental
+    -   Analysis sets are 2/3 of the training set
+    -   Each assessment set is a distinct 1/3
+    -   The final resampling estimate of performance averages each of the 3 replicates
+    :::
+
+-   This was useful for illustrative purposes, but `v = 3` is a poor choice in practice
+
+-   Values of `v` are most often 5 or 10; we generally prefer 10-fold cross-validation as a default
+
+## Bias-Variance tradeoff
+
+\begin{align}
+\mbox{prediction error } = \mbox{ irreducible error } + \mbox{ bias } + \mbox{ variance}
+\end{align}
+
+* **irreducible error**  is the natural variability that comes with observations.  
+
+* **bias** of the model represents the difference between the true model and a model which is too simple.  The more complicated the model, the closer the points are to the prediction.  
+
+* **variance** represents the variability of the model from sample to sample.  A simple model would not change a lot from sample to sample.  
+
+
+
+## Bias-Variance tradeoff
+
+```{r out.width='70%', fig.align='center', echo=FALSE}
+knitr::include_graphics("figs/varbias.png")
+```
+
+\vspace*{-2cm}Credit: An Introduction to Statistical Learning, James et al.
