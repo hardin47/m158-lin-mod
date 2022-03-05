@@ -46,6 +46,15 @@ Your task for the SLR project is to apply the tools of simple linear regression 
 
 ## Part 3 (worth 30 pts)
 
+* <a href="https://m158-lin-mod.netlify.app/slides/proj3_mlr_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Semester Project Part 3: MLR</a>, full instructions.
+
+The task for the MLR project is to build MLR models using the tools we've covered in class.  You should come up with a single model in the end and assess how well that model does at predicting.  In particular, you will: 
+
+* Try feature engineering to identify variables that may be good predictors of the response variable.
+* Computational model building: Apply cross validation to two or more models to identify which of the two has stronger predictive power (higher $R^2$ or lower RMSE).
+* Statistical model building: Use nested F-tests, $R^2_{adj}$, etc. to identify variables which are optimal in a statistical sense.
+
+
 ## Part 4 (worth 40 pts)
 
 

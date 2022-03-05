@@ -106,7 +106,7 @@ schedule <- tribble(
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',  
     '<font color = "#114B5F"><b>4.5.22</b></font>', '<font color = "#114B5F"><b>Proj 3: MLR</b></font>',
-  '<a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 3: MLR</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/proj3_mlr_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 3: MLR</a>',
   '',"", 
   '',
      "Week 12 <br> 4.12.22", 'catch-up',"$\\boldsymbol{\\cdot}$ <br> ", 
