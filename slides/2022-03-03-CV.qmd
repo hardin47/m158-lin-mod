@@ -131,6 +131,14 @@ office_wflow1 <- workflow() %>%
 office_wflow1
 ```
 
+```{r echo = FALSE}
+office_wflow2 <- workflow() %>%
+  add_model(office_spec) %>%
+  add_recipe(office_rec2)
+
+office_wflow2
+```
+
 ## Fit model to training data
 
 . . .
@@ -230,6 +238,17 @@ office_fit_rs1 <- office_wflow1 %>%
 office_fit_rs1
 ```
 
+```{r}
+#| echo: true
+
+set.seed(456)
+
+office_fit_rs2 <- office_wflow2 %>%
+  fit_resamples(folds)
+
+office_fit_rs2
+```
+
 ## Cross validation, now what?
 
 -   We've fit a bunch of models
@@ -239,7 +258,10 @@ office_fit_rs1
 
 ```{r}
 collect_metrics(office_fit_rs1)
+collect_metrics(office_fit_rs2)
 ```
+
+Choose Model 1.
 
 ## Deeper look into CV metrics
 
