@@ -32,7 +32,7 @@ The following guidelines will be used to evaluate reports.^[Adapted from Christi
 
 * usually display careful, creative, and critical thinking but might have a few lapses.  
 * be described accurately by at least 2 of the following descriptors: clear, concise, well-organized, and engaging.
-* be {\em mostly} understandable to someone who has finished Math 158 and received a B or better. 
+* be *mostly* understandable to someone who has finished Math 158 and received a B or better. 
 * describe and interpret all important statistical findings in the context of the study.
 * show a solid understanding of the statistical methods we have discussed. 
 * have references that are possibly incomplete.
