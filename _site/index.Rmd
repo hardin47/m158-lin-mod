@@ -85,7 +85,7 @@ schedule <- tribble(
   '',"", 
   '',
   
-    "Week 8 <br> 3.8.22", 'Model <br> Building',"$\\boldsymbol{\\cdot}$ sums of squares <br> $\\boldsymbol{\\cdot}$ nested F-tests <br> $\\boldsymbol{\\cdot}$ coef of determination <br> $\\boldsymbol{\\cdot}$ mulicollinearity", 
+    "Week 8 <br> 3.8.22", 'Model <br> Building',"$\\boldsymbol{\\cdot}$ sums of squares <br> $\\boldsymbol{\\cdot}$ nested F-tests <br> $\\boldsymbol{\\cdot}$ coef of determination", 
   '<a href="https://st47s.com/Math158/Notes/build.html" target = "_blank"><i class="fas fa-book-open"></i> Build</a> <br> <i class="fas fa-book-open"></i> ALSM 7<br> ',
   '<a href="https://m158-lin-mod.netlify.app/slides/wu12_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 12</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu13_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 13</a>',
   '',
@@ -93,14 +93,16 @@ schedule <- tribble(
   '',
   '',
   '',      
-  "Week 9 <br> 3.22.22", 'Model <br>Building',"$\\boldsymbol{\\cdot}$ <br> ", 
+  "Week 9 <br> 3.22.22", 'Model <br>Building',"$\\boldsymbol{\\cdot}$ mulicollinearity <br> $\\boldsymbol{\\cdot}$ <br> stepwise procedures ", 
   '<a href="https://st47s.com/Math158/Notes/build.html" target = "_blank"><i class="fas fa-book-open"></i> Build</a> <br>  <br> <i class="fas fa-book-open"></i> ALSM 9<br><a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 6.1 </a>',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
-  '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',  
+  '',  
+  
     "Week 10 <br> 3.29.22", 'Diagnostics',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="https://st47s.com/Math158/Notes/diag2.html" target = "_blank"><i class="fas fa-book-open"></i> Diagnostics II</a> <br> <i class="fas fa-book-open"></i> ALSM 10',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',  
+  
     "Week 11 <br> 4.5.22", 'Ridge Regression',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="https://st47s.com/Math158/Notes/shrink.html" target = "_blank"><i class="fas fa-book-open"></i> Ridge</a> <br> <i class="fas fa-book-open"></i> ALSM 11.2<br> <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 6.2 </a>',
   '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
