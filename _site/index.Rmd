@@ -105,7 +105,7 @@ schedule <- tribble(
   
     "Week 11 <br> 4.5.22", 'Ridge Regression',"$\\boldsymbol{\\cdot}$ <br> ", 
   '<a href="https://st47s.com/Math158/Notes/shrink.html" target = "_blank"><i class="fas fa-book-open"></i> Ridge</a> <br> <i class="fas fa-book-open"></i> ALSM 11.2<br> <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 6.2 </a>',
-  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
+  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu18_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 18</a>',
   '<a href="" target = "_blank"><i class="fa fa-comments"></i> </a>',  
     '<font color = "#114B5F"><b>4.5.22</b></font>', '<font color = "#114B5F"><b>Proj 3: MLR</b></font>',
   '<a href="https://m158-lin-mod.netlify.app/slides/proj3_mlr_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Proj 3: MLR</a>',
