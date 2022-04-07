@@ -1,0 +1,282 @@
+---
+title: "Ridge Regression"
+subtitle: "Math 158 - Spring 2022"
+author: "Jo Hardin (from Julia Silge)"
+footer: "[https://m158-lin-mod.netlify.app/](https://m158-lin-mod.netlify.app/)"
+logo: "../images/st47s.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+```
+
+
+
+```{r echo = FALSE}
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+```
+
+## Data & goal {.smaller}
+
+::: nonincremental
+- dataset is from [TidyTuesday](https://github.com/rfordatascience/tidytuesday). 
+- we explore the information from [The Office](https://www.imdb.com/title/tt0386676/).  
+- analysis taken from [Julia Silge's blog](https://juliasilge.com/blog/lasso-the-office/).  
+- she does a bit of data wrangling that I'm going to hide.  Look through her blog, or see the [source code](https://github.com/hardin47/website/tree/gh-pages/Math158) for this bookdown file.
+:::
+
+
+```{r echo = FALSE}
+ratings_raw <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-03-17/office_ratings.csv")
+
+remove_regex <- "[:punct:]|[:digit:]|parts |part |the |and"
+
+office_ratings <- ratings_raw %>%
+  transmute(
+    episode_name = str_to_lower(title),
+    episode_name = str_remove_all(episode_name, remove_regex),
+    episode_name = str_trim(episode_name),
+    imdb_rating
+  )
+
+office_info <- schrute::theoffice %>%
+  mutate(
+    season = as.numeric(season),
+    episode = as.numeric(episode),
+    episode_name = str_to_lower(episode_name),
+    episode_name = str_remove_all(episode_name, remove_regex),
+    episode_name = str_trim(episode_name)
+  ) %>%
+  select(season, episode, episode_name, director, writer, character)
+
+characters <- office_info %>%
+  count(episode_name, character) %>%
+  add_count(character, wt = n, name = "character_count") %>%
+  filter(character_count > 800) %>%
+  select(-character_count) %>%
+  pivot_wider(
+    names_from = character,
+    values_from = n,
+    values_fill = list(n = 0)
+  )
+
+creators <- office_info %>%
+  distinct(episode_name, director, writer) %>%
+  pivot_longer(director:writer, names_to = "role", values_to = "person") %>%
+  separate_rows(person, sep = ";") %>%
+  add_count(person) %>%
+  filter(n > 10) %>%
+  distinct(episode_name, person) %>%
+  mutate(person_value = 1) %>%
+  pivot_wider(
+    names_from = person,
+    values_from = person_value,
+    values_fill = list(person_value = 0)
+  )
+
+
+
+office <- office_info %>%
+  distinct(season, episode, episode_name) %>%
+  inner_join(characters) %>%
+  inner_join(creators) %>%
+  inner_join(office_ratings %>%
+    select(episode_name, imdb_rating)) %>%
+  janitor::clean_names()
+```
+
+# Modeling prep
+
+## Split data into training and testing
+
+```{r}
+set.seed(47)
+office_split <- initial_split(office, strata = season)
+office_train <- training(office_split)
+office_test <- testing(office_split)
+
+office
+```
+
+## Full linear model
+
+```{r}
+office_lm <- office_train %>%
+  select(-episode_name) %>%
+  lm(imdb_rating ~ ., data = .)
+
+office_lm %>% tidy()
+```
+
+## What if $n$ is really small?
+
+```{r}
+set.seed(47)
+office_train %>%
+  select(-episode_name) %>%
+  slice_sample(n = 5) %>%
+  lm(imdb_rating ~ ., data = .) %>% 
+  tidy()
+```
+
+
+
+## Create recipe 
+
+```{r}
+office_rec <- recipe(imdb_rating ~ ., data = office_train) %>%
+  update_role(episode_name, new_role = "ID") %>%
+  step_zv(all_numeric(), -all_outcomes()) %>%
+  step_normalize(all_numeric(), -all_outcomes())
+```
+
+## Create workflow
+
+`mixture = 0` means ridge regression (`mixture = 1` means Lasso)
+
+```{r}
+ridge_spec <- linear_reg(mixture = 0, penalty = 47) %>%
+  set_mode("regression") %>%
+  set_engine("glmnet")
+
+ridge_wf <- workflow() %>%
+  add_recipe(office_rec)
+
+ridge_fit <- ridge_wf %>%
+  add_model(ridge_spec) %>%
+  fit(data = office_train)
+```
+
+## Ridge Regression Output
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+ridge_fit %>% tidy()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+ridge_fit %>% tidy(penalty = 0)
+```
+:::
+
+::::
+
+
+## Coefficients as a function of lambda
+
+```{r}
+ridge_fit %>%
+  extract_fit_engine() %>%
+  plot(xvar = "lambda")
+```
+
+
+## How do we find lambda?
+
+We `tune()` (instead of setting the `penalty`)
+
+```{r}
+ridge_spec_tune <- linear_reg(mixture = 0, penalty = tune()) %>%
+  set_mode("regression") %>%
+  set_engine("glmnet")
+```
+
+
+## New workflow with tuned engine
+
+`ridge_spec_tune` was created with `tune()`
+
+```{r}
+set.seed(1234)
+office_fold <- vfold_cv(office_train, strata = season)
+  
+ridge_grid <- grid_regular(penalty(range = c(-5, 5)), levels = 50)
+
+ridge_wf <- workflow() %>%
+  add_recipe(office_rec)
+
+ridge_fit <- ridge_wf %>%
+  add_model(ridge_spec_tune) %>%
+  fit(data = office_train)
+
+# this is the line that tunes the model using cross validation
+set.seed(2020)
+ridge_cv <- tune_grid(
+  ridge_wf %>% add_model(ridge_spec_tune),
+  resamples = office_fold,
+  grid = ridge_grid
+)
+```
+
+
+## Which lambda is best?
+
+```{r}
+collect_metrics(ridge_cv) %>%
+  filter(.metric == "rmse") %>%
+  arrange(mean)
+```
+
+
+## Visualizing RMSE
+
+```{r echo = FALSE}
+ridge_cv %>%
+  collect_metrics() %>%
+  ggplot(aes(x = penalty, y = mean, color = .metric)) + 
+  geom_errorbar(aes(
+    ymin = mean - std_err,
+    ymax = mean + std_err),
+    alpha = 0.5) + 
+  geom_line(size = 1.5) + 
+  scale_x_log10() 
+```
+
+
+## Best model
+
+
+```{r}
+best_rr <- select_best(ridge_cv, metric = "rmse")
+best_rr
+```
+
+## Final Ridge Model
+
+```{r}
+finalize_workflow(ridge_wf %>% add_model(ridge_spec_tune), best_rr) %>%
+  fit(data = office_test) %>% tidy()
+```
+
+
+## Bias-Variance tradeoff
+
+```{r out.width='70%', fig.align='center', echo=FALSE}
+knitr::include_graphics("figs/varbias.png")
+```
+
+\vspace*{-2cm}Credit: An Introduction to Statistical Learning, James et al.
