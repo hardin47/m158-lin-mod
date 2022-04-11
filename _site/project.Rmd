@@ -21,6 +21,7 @@ The semester project will be broken down into 4 sections.  Each part will get su
 * 2/20/22 (Sunday) Part 2: SLR
 * 3/3/22 (Thursday) Peer review on SLR (as GitHub Issue)
 * 4/5/22 (Tuesday) Part 3: MLR
+* 5/4/22 (Wednesday) Seniors only -- Part 4 due
 * 5/10/22 (Tuesday) Part 4: Beyond linear + summary
 
 
@@ -57,4 +58,9 @@ The task for the MLR project is to build MLR models using the tools we've covere
 
 ## Part 4 (worth 40 pts)
 
+* <a href="https://m158-lin-mod.netlify.app/slides/proj4_final_158.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> Semester Project Part 4: non-OLS + new + final</a>, full instructions.
+
+In the final part of the project, you have 3 separate tasks.  The first is to apply the topics from the sparse and smooth linear models.  The second is to apply something new (see <a href="https://m158-lin-mod.netlify.app/slides/proj4_final_158.pdf" target = "_blank">full instructions</a>).  Woo hoo, you get to learn / try something new!!  The final task is to summarize the semester project in a meaningful way for a client.  Feel free to re-do anything from previous projects to make your final report even better.
+
+Yes, it is going to seem awkward to try to combine all three parts.  Do your best.
 
