@@ -222,6 +222,6 @@ Please email and / or set up a time to talk if you have any questions about or d
 :::note 
   * 25% Homework
   * 45% Midterms 
-  * 25% Group Project & Presentation 
+  * 25% Group Project
   * 5% Class Participation 
 :::
