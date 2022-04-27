@@ -124,9 +124,9 @@ schedule <- tribble(
   '<a href="https://m158-lin-mod.netlify.app/slides/wu20_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 20</a> <br> <a href="https://m158-lin-mod.netlify.app/slides/wu21_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 21</a>',
   '',  
   
-     "Week 14 <br> 4.26.22", 'Smoothers',"$\\boldsymbol{\\cdot}$ <br> ", 
+     "Week 14 <br> 4.26.22", 'Smoothers',"$\\boldsymbol{\\cdot}$ ridge regression <br> $\\boldsymbol{\\cdot}$ loess ", 
   '<a href="https://st47s.com/Math158/Notes/smooth.html" target = "_blank"><i class="fas fa-book-open"></i> Smooth</a> <br>  <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf" target = "_blank"><i class="fas fa-book-open"></i> ISLR 7 </a>',
-  '<a href="" target = "_blank"><i class="fas fa-desktop"></i> </a> <br> <a href="" target = "_blank"><i class="fas fa-pencil-alt"></i> WU</a>',
+  '<a href="https://m158-lin-mod.netlify.app/slides/wu22_ma158_s22.pdf" target = "_blank"><i class="fas fa-pencil-alt"></i> WU 22</a>',
   '<a href="http://freerangestats.info/blog/2022/03/26/supreme-court-nominations" target = "_blank"><i class="fa fa-comments"></i> Smoothing as average</a>',
   
      '<font color = "#114B5F"><b>5.3.22</b></font>', '<font color = "#114B5F"><b>Exam 3</b></font>',"", 
